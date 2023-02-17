@@ -14,7 +14,7 @@ int main(void)
 		putc(n, stdout);
 		n++;
 	}
-	putc("\n");
+	putc('\n', stdout);
 	return (0);
 }
 
