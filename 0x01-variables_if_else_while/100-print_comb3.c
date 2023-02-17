@@ -13,16 +13,16 @@ int main(void)
 	{
 
 		if (i < 10)
-			putchar (0);
+			putchar('0' + 48);
 		else if (i % 10 == i / 10)
 			continue;
 		else if (i % 10 == 0)
 			continue;
-		putchar (i);
+		putchar(i + 48);
 		if (i % 10 == 0)
 			break;
-		putchar (',');
-		putchar (' ');
+		putchar(',');
+		putchar(' ');
 	}
 	putchar('\n');
 	return (0);
