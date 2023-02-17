@@ -18,7 +18,7 @@ int main(void)
 		}
 		putchar(i + 48);
 		putchar(',');
-		putchar(' ')'
+		putchar(' ');
 		if (i == 8)
 			first_time = false;
 	}
