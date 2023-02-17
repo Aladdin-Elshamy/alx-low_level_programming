@@ -11,10 +11,10 @@ int main(void)
 
 	while (n <= 122)
 	{
-		putc("%c", n);
-		putc("\n");
-		n++
+		putc(n, stdout);
+		n++;
 	}
+	putc("\n");
 	return (0);
 }
 
