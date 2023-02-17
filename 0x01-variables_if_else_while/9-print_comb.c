@@ -8,11 +8,10 @@
 int main(void)
 {
 	int i;
-	bool first_time = true;
 
 	for (i = 0; i <= 9; i++)
 	{
-		if (!first_time)
+		if (i == 9)
 		{
 			putchar(i + 48);
 			break;
