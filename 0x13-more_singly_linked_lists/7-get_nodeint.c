@@ -9,7 +9,7 @@
  */
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-	listint_t *cursor = NULL;
+	listint_t *node = NULL;
 	unsigned int i = 0;
 
 	while (head != NULL)
@@ -18,7 +18,7 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 		{
 			if (i == index)
 			{
-				cursor = head;
+				node = head;
 				break;
 			}
 			head = head->next;
@@ -27,5 +27,5 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 		else
 			return (NULL);
 	}
-	return (cursor);
+	return (node);
 }
