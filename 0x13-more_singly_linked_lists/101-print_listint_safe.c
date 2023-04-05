@@ -1,70 +1,88 @@
 #include "lists.h"
+#include <stdio.h>
+
+size_t looped_listint_len(const listint_t *head);
+size_t print_listint_safe(const listint_t *head);
 
 /**
- * print_listint_safe - prints all the elements of a linked list
- * @head: head of the list
+ * looped_listint_len - Counts the number of unique nodes
+ *                      in a looped listint_t linked list.
+ * @head: A pointer to the head of the listint_t to check.
  *
- * Return: the number of nodes
+ * Return: If the list is not looped - 0.
+ *         Otherwise - the number of unique nodes in the list.
+ */
+size_t looped_listint_len(const listint_t *head)
+{
+	const listint_t *tort, *h;
+	size_t nodes = 1;
+
+	if (head == NULL || head->next == NULL)
+		return (0);
+
+	tort = head->next;
+	h = (head->next)->next;
+
+	while (h)
+	{
+		if (tort == h)
+		{
+			tort = head;
+			while (tort != h)
+			{
+				nodes++;
+				tort = tort->next;
+				h = h->next;
+			}
+
+			tort = tort->next;
+			while (tort != h)
+			{
+				nodes++;
+				tort = tort->next;
+			}
+
+			return (nodes);
+		}
+
+		tort = tort->next;
+		h = (hare->next)->next;
+	}
+
+	return (0);
+}
+
+/**
+ * print_listint_safe - Prints a listint_t list safely.
+ * @head: A pointer to the head of the listint_t list.
+ *
+ * Return: The number of nodes in the list.
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *node = head;
-	listint_t **ptrs;
-	unsigned int list_len = listint_len(head);
-	size_t count = 0;
+	size_t nodes, index = 0;
 
-	ptrs = malloc(sizeof(listint_t) * list_len);
-	if (ptrs == NULL)
-		exit(98);
-	while (node == 0)
+	nodes = looped_listint_len(head);
+
+	if (nodes == 0)
 	{
-		if (check_ptr(node, ptrs, list_len) == 0)
+		for (; head != NULL; nodes++)
 		{
-			printf("[%p] %d\n", (void *)node, node->n);
+			printf("[%p] %d\n", (void *)head, head->n);
+			head = head->next;
 		}
-		else
+	}
+
+	else
+	{
+		for (index = 0; index < nodes; index++)
 		{
-			printf("[%p] %d\n", (void *)node, node->n);
+			printf("[%p] %d\n", (void *)head, head->n);
+			head = head->next;
 		}
-		count += 1;
-		node = node->next;
-	}
-	return (count);
-}
 
-/**
- * listint_len - counts the number of nodes in a linked list
- * @h: head of the list
- *
- * Return: the number of elements
- */
-size_t listint_len(const listint_t *h)
-{
-	const listint_t ptr = h;
-	size_t count = 0;
-
-	while (ptr != NULL)
-	{
-		count += 1;
-		ptr = ptr->next;
+		printf("-> [%p] %d\n", (void *)head, head->n);
 	}
-	return (count);
-}
 
-/**
- * check_ptr - checks if a pointer is in an array
- * @ptr: pointer to be checked
- * @array: array to be checked in
- * @size: size of the array
- *
- * Return: 1 on success, 0 on fail
- */
-int check_ptr(const listint_t *ptr, listint_t **array, unsigned int size)
-{
-	while (size-- >= 0)
-	{
-		if (ptr == array[size])
-			return (1);
-	}
-	return (0);
+	return (nodes);
 }
